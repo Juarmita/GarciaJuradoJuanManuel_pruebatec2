@@ -26,11 +26,11 @@ public class SvFiltro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Obtener parámetros de la solicitud
+        // Obtener parámetros desde el JSP
         String estado = request.getParameter("estado");
         String fechaStr = request.getParameter("fecha");
 
-        // Filtrar los turnos según los parámetros recibidos
+        // Filtrado de los turnos
         List<Turno> listaTurnosFiltrados = filtrarTurnos(estado, fechaStr);
 
         // Almacenar la lista filtrada en la sesión
@@ -48,7 +48,7 @@ public class SvFiltro extends HttpServlet {
         // Obtener todos los turnos
         List<Turno> listaTurnos = control.traerTurno();
 
-        // Filtrar por estado si se ha especificado
+        // Filtrar por estado
         if (estado != null && !estado.isEmpty()) {
             for (Turno turno : listaTurnos) {
                 if (turno.getEstado().equals(estado)) {
@@ -56,11 +56,11 @@ public class SvFiltro extends HttpServlet {
                 }
             }
         } else {
-            // Si no se ha especificado estado, conservar todos los turnos
+            
             listaTurnosFiltrados.addAll(listaTurnos);
         }
 
-        // Filtrar por fecha si se ha especificado
+        // Filtrar por fechagit 
         if (fechaStr != null && !fechaStr.isEmpty()) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
